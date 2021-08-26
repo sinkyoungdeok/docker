@@ -93,9 +93,28 @@
 - 도커는 기본적으로 linux를 지원하기 떄문에 MacOS와 Windows에 설치되는 Docker는 가상머신에 설치됨
 - MacOS는 xhyve를 사용하고 Windows는 Hyper-V 사용
     - Windows Pro에서만 설치가 가능했으나 Windows WSL 2를 이용하여 Home 버전도 설치 가능
-    - 그 외에 Windows 사용자는 VirtualBox에 ubuntu 리눅스를 설치하여 실습
+    - 그 외에 Windows 사용자는 VirtualBox에 ubuntu 리눅스를 설치하여 실
 
 ## 2. 도커 기본 명령어(run)
+### run - 컨테이너 실행
+- docker run [OPTIONS] IMAGE:[:TAG|@DIGEST] [COMMAND] [ARG...]
+    - -d: detached mode (백그라운드 모드)
+    - -p: 호스트와 컨테이너의 포트를 연결
+    - -v: 호스트와 컨테이너의 디렉토리를 연결
+    - -e: 컨테이너 내에서 사용할 환경변수 설정
+    - --name: 컨테이너 이름 설정
+    - --rm: 프로세스 종료시 컨테이너 자동 제거
+    - -it: -i와 -t를 동시에 사용한 것으로 터미널 입력을 위한 옵션
+    - --network: 네트워크 연결 
+
+### ubuntu 20.04 컨테이너 만들기
+- ```dokcer run ubuntu:20.04```
+    - run 명령어를 사용하면 사용할 이미지가 저장되어 있는지 확인하고 없으면 다운로드(pull) 한 후
+    컨테이너를 생성(create)하고 시작(start)합니다.
+    - 컨테이너는 정상적으로 실행 됐지만 뭘 하라고 명령어를 전달하지 않았기 때문에 컨테이너는
+    생성 되자마자 종료 됩니다. 컨테이너는 프로세스이기 때문에 실행중인
+    프로세스가 없으면 컨테이너는 종료 됩니다.
+
 ## 3. 도커 기본 명령어(ps, stop, rm, logs, images, ...)
 ## 4. 도커 기본 명령어(volume)
 ## 5. 도커 컴포즈 (docker compose) 기본
