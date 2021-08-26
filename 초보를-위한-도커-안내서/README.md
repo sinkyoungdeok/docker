@@ -88,6 +88,13 @@
 
 # 2. 도커-설치부터 실행까지
 ## 1. 도커 설치하기
+
+### MacOS or Windows
+- 도커는 기본적으로 linux를 지원하기 떄문에 MacOS와 Windows에 설치되는 Docker는 가상머신에 설치됨
+- MacOS는 xhyve를 사용하고 Windows는 Hyper-V 사용
+    - Windows Pro에서만 설치가 가능했으나 Windows WSL 2를 이용하여 Home 버전도 설치 가능
+    - 그 외에 Windows 사용자는 VirtualBox에 ubuntu 리눅스를 설치하여 실습
+
 ## 2. 도커 기본 명령어(run)
 ## 3. 도커 기본 명령어(ps, stop, rm, logs, images, ...)
 ## 4. 도커 기본 명령어(volume)
