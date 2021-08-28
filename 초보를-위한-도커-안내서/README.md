@@ -184,6 +184,66 @@ docker run -d -p 8080:80 \
 
 
 ## 3. 도커 기본 명령어(ps, stop, rm, logs, images, ...)
+### ps 명령어
+- `docker ps`
+  - 실행중인 컨테이너 목록을 확인하는 명령어
+- `docker ps -a`
+  - 중지된 컨테이너도 확인하려면 -a 옵션을 붙임 
+  
+### stop 명령어
+- `docker stop [OPTIONS] CONTAINER [CONTAINER...]`
+  - 실행중인 컨테이너를 중지하는 명령어
+  - 실행중인 컨테이너를 하나 또는 여러개(띄어쓰기) 중지할 수 있다.
+  
+### rm 명령어
+- `docker rm [OPTIONS] CONTAINER [CONTAINER...]`
+  - 종료된 컨테이너를 완전히 제거하는 명령어
+
+### logs 명령어
+- `docker logs [OPTIONS] CONTAINER`
+  - 컨테이너가 정상적으로 동작하는지 확인하는 좋은 방법은 로그를 확인하는 것이다.
+  - 기본 옵션과 -f, --tail 옵션을 살펴보자. 
+
+### images 명령어
+- `docker images [OPTIONS] [REPOSITORY[:TAG]]`
+  - 도커가 다운로드한 이미지 목록을 보는 명령어
+
+### pull 명령어
+- `docker pull [OPTIONS] NAME[:TAG|@DIGEST]`
+  - 이미지를 다운로드하는 명령어
+  - ex) `docker pull ubuntu:18.04`
+
+### rmi 명령어
+- `docker rmi [OPTIONS] IMAGE [IMAGE...]`
+  - 이미지를 삭제하는 방법
+  - images 명령어를 통해 얻는 이미지 목록에서 이미지 ID를 입력하면 삭제가 된다.
+  단, 컨테이너가 실행중인 이미지는 삭제되지 않는다.
+
+### network create 명령어
+- `docker network create [OPTIONS] NETWORK`
+  - 도커 컨테이너끼리 이름으로 통신할 수 있는 가상 네트워크를 만든다ㅣ.
+- `docker network create app-network`
+  - app-network 라는 이름으로 wordpress와 mysql이 통신할 네트워크를 만든다.
+
+### network connect 명령어
+- `docker network connect [OPTIONS] NETWORK CONTAINER`
+  - 기존에 생성된 컨테이너에 네트워크를 추가한다.
+- `docker network connect app-network mysql`
+  - mysql 컨테이너에 네트워크를 추가한다.
+
+### network option 명령어
+```
+  docker run -d -p 8080:80 \
+  --network=app-network \
+  -e WORDPRESS_DB_HOST=mysql \
+  -e WORDPRESS_DB_NAME=wp \
+  -e WORDPRESS_DB_USER=wp \
+  -e WORDPRESS_DB_PASSWORD=wp \
+  wordpress
+```
+- 워드프레스를 app-network에 속하게 하고 mysql을 이름으로 접근한다.
+
+
 ## 4. 도커 기본 명령어(volume)
 ## 5. 도커 컴포즈 (docker compose) 기본
 ## 6. 도커 컴포즈 문법 & 명령어
