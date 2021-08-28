@@ -173,10 +173,10 @@ quit
 ### 워드프레스 블로그 실행하기
 ```
 docker run -d -p 8080:80 \
-  -e WORDPRESS_DB_HOST = host.docker.internal \
-  -e WORDPRESS_DB_NAME = wp \
-  -e WORDPRESS_DB_USER = wp \
-  -e WORDPRESS_DB_PASSWORD = wp \
+  -e WORDPRESS_DB_HOST=host.docker.internal \
+  -e WORDPRESS_DB_NAME=wp \
+  -e WORDPRESS_DB_USER=wp \
+  -e WORDPRESS_DB_PASSWORD=wp \
   wordpress
 ```
 - 앞에서 만든 MySQL을 실행한 상태에서 생성한다.
