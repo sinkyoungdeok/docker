@@ -114,6 +114,74 @@
     - 컨테이너는 정상적으로 실행 됐지만 뭘 하라고 명령어를 전달하지 않았기 때문에 컨테이너는
     생성 되자마자 종료 됩니다. 컨테이너는 프로세스이기 때문에 실행중인
     프로세스가 없으면 컨테이너는 종료 됩니다.
+    - 조금 더 자세하게 설명하면 도커 이미지마다 컨테이너가 만들어질때 실행할 명령어를 지정할 수 있고
+    ubuntu:20.04는 "/bin/bash"가 지정되어 쉘이 실행되야 하지만, 입력 받을 수 있도록 "-it"
+    옵션을 입력하지 않았기 떄문에 바로 실행이 종료 된 것이다.
+
+### bin/sh 실행하기
+- ```docker run  --rm -it ubuntu:20.04 /bin/sh```
+    - 컨테이너 내부에 들어가기 위해 sh를 실행하고 키보드 입력을 위해 -it옵션을 준다.
+    - 추가적으로 프로세스가 종료되면 컨테이너가 자동으로 삭제 되도록 --rm 옵션도 추가 한다.
+    - --rm 옵션이 없다면 컨테이너가 종료되더라도 삭제되지 않고 남아 있어 수동으로 삭제 해야 한다.
+
+### CentOS 실행하기
+- ```docker run --rm -it centos:8 /bin/sh```
+    - 도커는 다양한 리눅스 배포판을 실행할 수 있다. 공통점은 모두 동일한 커널을 사용한다는 점이다.
+    - Ubuntu 또는 CentOS에 포함된 다양한 기본기능이 필요 없는 경우, Alpine 이라는 초소형(5MB)이미지를 사용할 수도 있다.
+
+### 웹 어플리케이션 실행하기
+- ``` docker run --rm -p 5678:5678 hashicorp/http-echo -text="hello world" ```
+    - detached mode(백그라운드 모드)로 실행하기 위해 -d 옵션을 추가하고 -p 옵션을 추가하여 컨테이너 포트를 호스트의 포트로 연결하였다.
+    - 브라우저를 열골 localhost:5678에 접속하면 메시지를 볼 수 있다.
+
+### Redis 실행하기
+- ```docker run --rm -p 1234:6379 redis```
+    - redis라는 메모리기반 데이터베이스를 실행
+    ``` 
+    $ telnet localhost 1234 # telnet이 설치되어 있으면 접속 가능
+    
+    set hello world
+    +OK
+    get hello
+    $5
+    world
+    quit
+    ```
+
+### MySQL 실행하기 
+```
+docker run -d -p 3306:3306 \
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+  --name mysql \
+  mysql:5.7
+```
+```
+MySQL 데이터베이스를 실행한다.
+docker exec -it mysql mysql 
+create database wp CHARACTER SET utf8;
+grant all privileges on wp.* to wp@'%' identified by 'wp';
+flush privileges;
+quit
+```
+
+### exec 명령어
+- exec 명령어는 run 명령어와 달리 실행중인 도커 컨테이너에 접속할 때 사용하며
+컨테이너 안에 ssh server등을 설치하지 않고 exec 명령어로 접속한다.
+  
+### 도커는 다양한 데이터베이스를 손쉽게 생성/삭제할 수 있기 때문에 개발할때도 많이 사용한다.
+
+### 워드프레스 블로그 실행하기
+```
+docker run -d -p 8080:80 \
+  -e WORDPRESS_DB_HOST = host.docker.internal \
+  -e WORDPRESS_DB_NAME = wp \
+  -e WORDPRESS_DB_USER = wp \
+  -e WORDPRESS_DB_PASSWORD = wp \
+  wordpress
+```
+- 앞에서 만든 MySQL을 실행한 상태에서 생성한다.
+- 웹브라우저 localhost:8080으로 접속 한다.
+
 
 ## 3. 도커 기본 명령어(ps, stop, rm, logs, images, ...)
 ## 4. 도커 기본 명령어(volume)
