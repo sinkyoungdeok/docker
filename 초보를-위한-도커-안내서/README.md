@@ -124,6 +124,9 @@
 </details>
 
 # 2. 도커-설치부터 실행까지
+
+<details> <summary> 1. 도커 설치하기 </summary>
+
 ## 1. 도커 설치하기
 
 ### MacOS or Windows
@@ -131,6 +134,11 @@
 - MacOS는 xhyve를 사용하고 Windows는 Hyper-V 사용
     - Windows Pro에서만 설치가 가능했으나 Windows WSL 2를 이용하여 Home 버전도 설치 가능
     - 그 외에 Windows 사용자는 VirtualBox에 ubuntu 리눅스를 설치하여 실
+
+
+</details>
+
+<details> <summary> 2. 도커 기본 명령어(run) </summary>
 
 ## 2. 도커 기본 명령어(run)
 ### run - 컨테이너 실행
@@ -219,6 +227,9 @@ docker run -d -p 8080:80 \
 - 앞에서 만든 MySQL을 실행한 상태에서 생성한다.
 - 웹브라우저 localhost:8080으로 접속 한다.
 
+</details>
+
+<details> <summary> 3. 도커 기본 명령어(ps, stop, rm, logs, images, ...) </summary>
 
 ## 3. 도커 기본 명령어(ps, stop, rm, logs, images, ...)
 ### ps 명령어
@@ -279,8 +290,24 @@ docker run -d -p 8080:80 \
   wordpress
 ```
 - 워드프레스를 app-network에 속하게 하고 mysql을 이름으로 접근한다.
+</details>
 
+<details> <summary> 4. 도커 기본 명령어(volume) </summary>
 
 ## 4. 도커 기본 명령어(volume)
+</details>
+
+
+
+<details> <summary> 5. 도커 컴포즈 (docker compose) 기본 </summary>
+
 ## 5. 도커 컴포즈 (docker compose) 기본
+
+</details>
+
+
+<details> <summary> 6. 도커 컴포즈 문법 & 명령어 </summary>
+
 ## 6. 도커 컴포즈 문법 & 명령어
+
+</details>
