@@ -377,6 +377,7 @@ services:
 
 ## 6. 도커 컴포즈 문법 & 명령어
 
+## 6-1 도커 컴포즈 문법
 ### version
 `version: '3'`
 
@@ -461,4 +462,60 @@ django:
 - image 속성 대신 사용함
 - 여기에 사용할 별도의 도커 파일이 필요함 
 
+## 6-2 도커 컴포즈 명령어 
+
+### up
+- docker-compose.yml에 정의된 컨테이너를 실행
+- docker-compose up
+- docker-compose up -d
+  - docker run의 -d 옵션과 동일
+- docker-compose up --force-recreate
+  - 컨테이너를 새로 만들기
+- docker-compose up --build
+  - 도커 이미지를 다시 빌드(build로 선언했을 때만)
+
+### start
+- 멈춘 컨테이너를 재개
+- docker-compose start
+- docker-compose start wordpress
+  - wordpress 컨테이너만 재개 
+
+### restart
+- 컨테이너를 재시작
+- docker-compose restart
+- docker-compose restart wordpress
+  - wordpress 컨테이너만 재시작
+  
+### stop
+- 컨테이너 멈춤 
+- docker-compose stop
+- docker-compose stop wordpress
+  - wordpress 컨테이너만 멈춤
+  
+### down  
+- 컨테이너를 종료하고 삭제
+- docker-compose down
+
+### logs
+- 컨테이너의 로그 
+- docker-compose logs
+- docker-compose logs -f
+  - 로그 follow
+  
+### ps
+- 컨테이너 목록
+- docker-compose ps
+
+### exec
+- 실행중인 컨테이너에서 명령어 실행
+- docker-compose exec {컨테이너 이름} {명령어}
+- docker-compose exec wordpress bash
+
+### build
+- 컨테이너 build 부분에 정의된 내용대로 빌드
+- build로 선언된 컨테이너만 빌드됨
+- docker-compose build
+- docker-compose build wordpress
+  - wordpress 컨테이너만 build
+  
 </details>
