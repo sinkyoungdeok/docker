@@ -295,6 +295,22 @@ docker run -d -p 8080:80 \
 <details> <summary> 4. 도커 기본 명령어(volume) </summary>
 
 ## 4. 도커 기본 명령어(volume)
+
+### volume mount (-v) 명령어
+```
+docker stop mysql
+docker rm mysql
+docker run -d -p 3306:3306 \
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+  --network=app-network \
+  --name mysql \
+  -v /Users/singyeongdeog/mysql:/var/lib/mysql \
+  mysql:5.7
+```
+- mysql을 삭제후에 다시 실행하면 워드프레스 사이트에서 데이터베이스 오류가 발생
+- `-v` 옵션으로 내 pc에 데이터를 저장할 위치를 선택 
+- `-v` 옵션을 안주게 되면 기본적으로 컨테이너를 삭제하면 저장 데이터들은 삭제됨
+
 </details>
 
 
