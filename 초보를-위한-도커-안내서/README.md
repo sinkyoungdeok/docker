@@ -319,6 +319,55 @@ docker run -d -p 3306:3306 \
 
 ## 5. 도커 컴포즈 (docker compose) 기본
 
+- 도커 명령어들이 띄어 쓰기나 명령어들을 조심스럽게 써야 한다는 단점이 존재한다. 이걸 편하게 해주는 프로그램이 docker-compose이다.
+- docker-compose는 기본적으로 docker-for-mac, docker-for-window를 설치하면 같이 설치 된다.
+
+### 설치 확인 
+```
+$ docker-compose version
+```
+- 리눅스는 다음 명령어로 설치 해야 된다.
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/
+docker-compose-$(uname -s) 
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+### docker-compose.yml
+```
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+  wordpress:
+    image: wordpress:latest
+    volumes:
+      - ./wp:/var/www/html
+    ports:
+      - "8080:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: wordpress
+```
+
+### up 명령어
+`docker-compose up -d`
+- docker compose를 이용하여 mysql과 wordpress를 실행한다.
+- docker-compose.yml 파일 위치에 가서 명령어를 입력해야한다.
+
+### down 명령어
+`docker-compose down`
+- docker compose를 이용하여 mysql과 wordpress를 종료한다.
+
 </details>
 
 
