@@ -519,3 +519,22 @@ django:
   - wordpress 컨테이너만 build
   
 </details>
+
+<details> <summary> 7. [실습] nginx 컨테이너 만들기 </summary>
+
+## 7. [실습] nginx 컨테이너 만들기
+
+- 참고링크
+  - https://hub.docker.com/_/nginx/
+  
+- 실습 정보
+  - 이미지: nginx:latest
+  - 포트: 80
+  - HTML 경로: /usr/share/nginx/html
+- 문제 > 다음 조건을 만족하는 컨테이너를 실행
+  1. nginx 컨테이너를 50000 포트로 연결하여 실행
+  2. 임의의 index.html파일을 만들고 이 파일 내요을 제공하는 nginx 컨테이너 실행 (docker run -v 옵션 활용)
+  
+[정답](./2.nginx)
+
+</details>
