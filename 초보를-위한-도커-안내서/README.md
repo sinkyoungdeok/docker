@@ -377,4 +377,88 @@ services:
 
 ## 6. 도커 컴포즈 문법 & 명령어
 
+### version
+`version: '3'`
+
+- docker-compose.yml 파일의 명세 버전
+- docker-compose.yml 버전에 따라 지원하는 도커 에진 버전도 다름
+
+
+### services
+```
+services:
+  postgres:
+  ...
+  django:
+  ...
+```
+- 실행할 컨테이너 정의
+- docker run --name djange와 같다고 생각할 수 있음
+
+### image
+```
+services:
+  django:
+    image: django-sample
+```
+- 컨테이너에 사용할 이미지 이름과 태그
+- 태그를 생략하면 latest
+- 이미지가 없으면 자동으로 pull
+
+### ports
+```
+services:
+  django:
+    ...
+    ports:
+    -"8000:8000"
+```
+- 컨테이너와 연결할 포트(들)
+- {호스트 포트}:{컨테이너 포트}
+
+### environment
+```
+services:
+  mysql:
+    ...
+    environment:
+      - MYSQL_ROOT_PASSWORD=somewordpress:'3'
+```
+- 컨테이너에서 사용할 환경변수(들)
+- {환경변수 이름}:{값}
+
+### volumes
+```
+services:
+  django:
+    ...
+    volumes:
+      - ./app:/app
+```
+- 마운트하려는 디렉터리(들)
+- {호스트 디렉터리}:{컨테이너 디렉터리}
+
+### restart
+```
+services:
+  django:
+    restart: always
+```
+- 재시작 정책
+  - restart: "no"
+  - restart: always
+  - restart: on-failure
+  - restart: unless-stopped
+
+### build
+```
+django:
+  build:
+    context: .
+    dockerfile: ./compose/django/Dockerfile-dev
+```
+- 이미지를 자체 빌드 후 사용
+- image 속성 대신 사용함
+- 여기에 사용할 별도의 도커 파일이 필요함 
+
 </details>
