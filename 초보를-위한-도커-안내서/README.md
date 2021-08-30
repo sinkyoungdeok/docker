@@ -835,6 +835,10 @@ CMD command param1 param2
 
 ## 4. 도커 배포 기본
 
+### 배포하기
+`docker run -d -p 3000:3000 subicura/app`
+- 컨테이너 실행 = 이미지 pull + 컨테이너 start
+
 </details>
 
 
