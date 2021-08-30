@@ -538,3 +538,27 @@ django:
 [정답](./2.nginx)
 
 </details>
+
+
+
+
+<details> <summary> 8. [실습] php cli 컨테이너 실행하기 </summary>
+
+## 8. [실습] php cli 컨테이너 실행하기
+
+- 참고링크
+  - https://hub.docker.com/_/php/
+
+- 실습 정보
+  - 이미지: php:7
+  - 브라우저 접속이 아닌 CLI 테스트
+- 문제 > 다음 조건을 만족하는 컨테이너를 실행
+  다음 소스를 hello.php로 저장 
+  
+  `<?php phpinfo() ?>`
+  1. hello.php를 php container로 실행 (-v 옵션으로 hello.php를 연결)
+  2. 실행결과(php 설정 정보)를 확인 
+
+[정답](./3.php-cli)
+
+</details>
