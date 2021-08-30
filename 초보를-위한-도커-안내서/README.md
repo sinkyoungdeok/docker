@@ -850,6 +850,26 @@ CMD command param1 param2
 
 ## 5. [실습] Nginx를 이용한 정적 페이지 서버 만들기
 
+- 참고링크: https://hub.docker.com/_/nginx/
+- 실습 정보
+  - 이미지: nginx:latest
+  - 포트: 80
+  - HTML 경로: /usr/share/nginx/html
+- 문제 > 다음 조건을 만족하는 이미지를 만들고 컨테이너를 실행 해라.
+  1. index.html 을 만들고 빌드할 때 복사 (-v 옵션 사용 아님)
+  ```
+  <html>
+  <head>
+    <title>도커 이미지 예제</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <h1>Nginx 서버를 도커 이미지로 만들었습니다.</h1>
+  </body>
+  </html>
+  ```
+- [정답](6.nginx)
+
 </details>
 
 
