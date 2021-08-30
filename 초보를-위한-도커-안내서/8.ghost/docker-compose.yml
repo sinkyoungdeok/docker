@@ -1,0 +1,10 @@
+version: '2'
+services:
+  ghost:
+    image: ghost:latest
+    ports:
+      - "60000:2368"
+    volumes:
+      - ./:/var/lib/ghost/content
+    environment:
+      url: http://localhost:60000
