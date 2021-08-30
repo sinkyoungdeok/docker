@@ -945,7 +945,20 @@ CMD command param1 param2
 
 ## 2. [실습] ghost 블로그 컨테이너 생성
 
+- Ghost 블로그를 컨테이너로 실행하고 외부에서 접속 가능하게 포트를 노출한다.
+- 참고 링크
+  - https://hub.docker.com/_/ghost
+- 컨테이너 이미지 정보
+  - 이미지: ghost:latest
+  - 리스닝포트: 2368
+  - 데이터저장: /var/lib/ghost/content
+- 실습 내용
+  1. 60000 포트로 오픈
+  2. 업로드 데이터가 유실되지 않게 볼륨을 마운트
+  3. 관리자에서 미리보기 페이지가 정상작동하도록 환경변수를 설정
+  4. docker-compose.yml 파일로 작성
 
+- [정답](8.ghost)
 
 </details>
 
