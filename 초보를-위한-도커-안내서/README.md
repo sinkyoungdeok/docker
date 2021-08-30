@@ -1057,6 +1057,7 @@ CMD command param1 param2
   3. result는 60002로 오픈합니다. 
   4. docker-compose.yml 파일로 작성합니다.
 
+- [정답](10.vote-app)
 
 </details>
 
