@@ -689,6 +689,121 @@ $ docker images | grep ubuntu
 
 ## 2. 도커 이미지 만들기 - 웹 애플리케이션 (nodejs)
 
+### Nodejs 웹 애플리케이션
+```
+$ npm init
+$ npm i fastify --save
+```
+- 소스 파일 복사 > COPY 명령어
+- node_modules 제외 > .dockerignore
+```
+# 1. node 설치
+FROM ubuntu:20.04
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs npm
+
+# 2. 소스 복사 (현재 내 디렉토리에 있는 모든 파일을 /usr/src/app에 복사)
+COPY . /usr/src/app
+
+# 3. Nodejs 패키지 설치 ( /usr/src/app으로 이동 후 npm install 실행)
+WORKDIR /usr/src/app
+RUN npm install
+
+# 4. WEB 서버 실행 (Listen 포트 정의)
+EXPOSE 3000
+CMD node app.js
+```
+
+`node_modules/*` - .dockerignore
+
+- 이미지 빌드하기
+  - `docker build -t subicura/app .`
+- 컨테이너 실행하기
+  - `docker run --rm -d -p 3000:3000 subicura/app`
+
+### Nodejs 웹 애플리케이션 node 이미지 사용
+```
+# 1. node 이미지 사용 / 여기부분을 3줄이였는데 1줄로 변경
+FROM node:12
+# 2. 소스 복사
+COPY . /usr/src/app
+# 3. Nodejs 패키지 설치
+WORKDIR /usr/src/app
+RUN npm install
+# 4. WEB 서버 실행 (Listen 포트 정의)
+EXPOSE 3000
+CMD node app.js
+```
+
+### Nodejs 웹 애플리케이션 패키지 우선 복사 최적화
+```
+# 1. node 이미지 사용
+FROM node:12
+# 2. 패키지 우선 복사
+COPY ./package* /usr/src/app/
+WORKDIR /usr/src/app
+RUN npm install
+# 3. 소스 복사
+COPY . /usr/src/app
+# 4. WEB 서버 실행 (Listen 포트 정의)
+EXPOSE 3000
+CMD node app.js
+```
+
+### Nodejs 웹 애플리케이션 alpine 사용으로 SIZE 줄이기
+```
+# 1. node 이미지 사용 (alpine: 사용하지 않는 파일을 다 제거한 버전)
+FROM node:12-alpine
+# 2. 패키지 우선 복사
+COPY ./package* /usr/src/app/
+WORKDIR /usr/src/app
+RUN npm install
+# 3. 소스 복사
+COPY . /usr/src/app
+# 4. WEB 서버 실행 (Listen 포트 정의)
+EXPOSE 3000
+CMD node app.js
+```
+
+### FROM
+`FROM [--platform=<platform>] <image>[:<tag>] [AS <name>]`
+- 베이스 이미지 지정
+- FROM ubuntu:latest
+- FROM node:12
+- FROM python:3
+
+### COPY
+`COPY [--chown=<user>:<group>] <src>... <dest>`
+- 파일 또는 디렉토리 추가
+- COPY index.html /var/www/html/
+- COPY ./app /usr/src/app
+
+### RUN
+`RUN <command>`
+- 명령어 실행
+- RUN apt-get update
+- RUN npm install
+
+### WORKDIR
+`WORKDIR /path/to/workdir`
+- 작업 디렉토리 변경
+- WORKDIR /app
+
+### EXPOSE
+`EXPOSE 3000`
+- 컨테이너에서 사용하는 포트 정보
+- EXPOSE 8000
+
+### CMD
+```
+CMD ["executable","param1","param2"]
+CMD command param1 param2
+```
+- 테이너 생성시 실행할 명령어
+- CMD ["node","app.js"]
+- CMD node app.js
+
+  
 </details>
 
 
