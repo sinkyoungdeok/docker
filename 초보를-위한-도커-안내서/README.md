@@ -974,6 +974,40 @@ CMD command param1 param2
 
 ## 3. [실습] 방명록 배포하기
 
+- Frontend, Backend, Database로 이루어진 웹 서비스를 배포한다.
+- 각각의 서비스를 바라보는 endpoint를 환경변수로 지정할 수 있다.
+- 호스트 네트워크 방식, 가상 네트워크 방식, docker-compose 방식을 사용한다.
+
+- 실습 설명
+![image](https://user-images.githubusercontent.com/28394879/131345641-d2ae5914-a8f7-4cc3-907c-537b2dc7ce7b.png)
+
+- 실행 순서
+  1. mongodb
+  2. backend (mongodb를 바라봄)
+  3. frontend (backend를 바라봄)
+  
+- frontend
+  - 이미지: subicura/guestbook-frontend:latest
+  - 포트: PORT 환경변수에 지정한대로 사용함
+  - 환경변수
+    - PORT: 리스닝 포트로 설정
+    - GUESTBOOK_API_ADDR: Backend 서버 주소 ex) backend:8000
+
+- backend
+  - 이미지: subicura/guestbook-backend:latest
+  - 포트: PORT 환경변수에 지정한대로 사용함
+  - 환경변수
+    - PORT: 리스닝 포트로 설정
+    - GUESTBOOK_DB_ADDR: DB 서버 주소 ex) mongodb: 27017
+  
+- mongodb
+  - 이미지: mongo:4
+  - 포트: 27017
+  
+- 실습내용
+  1. 62000 포트로 서버를 오픈
+  2. docker-compose.yml 파일로 작성
+
 
 
 </details>
