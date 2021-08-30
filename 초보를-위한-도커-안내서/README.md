@@ -913,6 +913,8 @@ CMD command param1 param2
   1. hellonode:latest 이미지를 만든다.
   2. 호트스의 60000 포트로 오픈한다.
 
+- [정답](7.hellonode)
+
 </details>
 
 
