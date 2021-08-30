@@ -1024,6 +1024,38 @@ CMD command param1 param2
 
 ## 4. [실습] 투표 앱 생성
 
+- 깃 리파지토리를 clone 후 진행
+- 필요한 이미지를 직접 빌드하여 만듬
+- 여러개의 마이크로서비스를 연결
+
+- 참고링크: https://gitlab.com/44bits.io/workshop-voting.git
+  ![image](https://user-images.githubusercontent.com/28394879/131346205-16d5614e-0307-467a-9f63-73a13c981566.png)
+  
+- 컨테이너 이미지 정보
+  - vote
+    - 소스경로: ./vote
+    - 포트: 80
+    - voting-vote 이미지로 빌드
+  - redis
+    - 이미지: redis:alpine
+    - redis 이름으로 서비스를 생성
+  - worker
+    - 소스경로: ./worker
+    - 포트: 없음
+    - voting-worker 이미지로 빌드
+  - db
+    - 이미지: postgres:9.4
+    - db 이름으로 서비스를 생성
+  - result
+    - 소스경로: ./result
+    - 포트: 80
+    - voting-result 이미지로 빌드
+
+- 실습 내용
+  1. 5개의 서비스를 하나의 docker-compose.yml로 만듭니다. 
+  2. vote는 60001로 오픈합니다. 
+  3. result는 60002로 오픈합니다. 
+  4. docker-compose.yml 파일로 작성합니다.
 
 
 </details>
