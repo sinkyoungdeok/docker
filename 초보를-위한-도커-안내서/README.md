@@ -573,6 +573,112 @@ django:
 
 ## 1. 도커 이미지 만들기 - 기본
 
+### 이미지란
+- 도커는 레이어드 파일 시스템 기반
+- AUFS, BTRFS, Overlayfs, ...
+- 이미지는 프로세스가 실행되는 파일들의 집합(환경)
+- 프로세스는 환경(파일)을 변경할 수 있음
+- 이 환경을 저장해서 새로운 이미지를 만듬
+
+### rootfs / Base Image
+- 수정할 수 없는 읽기 전용 이미지
+- ubuntu, centos, mysql, ...
+
+### 상태변화 
+![image](https://user-images.githubusercontent.com/28394879/131294568-26ac9084-16b3-4525-b334-dd7e0c5be0f1.png)
+
+### 예시 - Git 설치
+```
+$ docker run -it --name git ubuntu:latest bash
+root@2f8bfff679f9:/# git
+bash: git: command not found
+root@2f8bfff679f9:/# apt-get update
+root@2f8bfff679f9:/# apt-get install -y git
+root@2f8bfff679f9:/# git --version
+git version 2.17.1
+```
+
+```
+$docker images | grep ubuntu
+ubuntu  latest    cf0f3ca922e0    5 days ago  64.2MB
+
+$docker commit git ubuntu:git
+
+$docker images | grep ubuntu
+ubuntu git        f95008381e22    17 seconds ago 186MB
+ubuntu  latest    cf0f3ca922e0    5 days ago  64.2MB
+```
+
+
+### 새로운 상태를 이미지로 저장 
+![image](https://user-images.githubusercontent.com/28394879/131295286-bcd3fa4d-6136-4f24-8b2d-c911ed845ae6.png)
+
+
+### 도커 이미지 이름 규칙
+- docker build -t subicura/ubuntu:git01.
+- subicura : 이름 공간(유저이름)
+- ubuntu : 이미지 이름
+- git01 : 태그
+- 이름 공간이 없을 경우엔 공식 이미지 이다.
+
+
+### 이미지를 만드는 자세
+- TDD 하듯이 해야 됨.
+- 한번에 성공하는 빌드는 없음
+- 파란불(빌드 성공)이 뜰 떄까지 많은 빨간불(빌드 실패)를 경험함
+- 일단 파란불이 켜져도 리팩토링을 통해 더 최적화된 이미지 생성
+
+
+### Dockerfile
+- FROM: 기본 이미지
+- RUN: 쉘 명령어 실행
+- CMD: 컨테이너 기본 실행 명령어 (Entrypoint의 인자로 사용)
+- EXPOSE: 오픈되는 포트 정보
+- ENV: 환경변수 설정
+- ADD: 파일 또는 디렉토리 추가. URL/ZIP 사용가능
+- COPY: 파일 또는 디렉토리 추가
+- ENTRYPOINT: 컨테이너 기본 싫행 명령어
+- VOLUME: 외부 마운트 포인트 생성
+- USER: RUN, CMD, ENTRYPOINT를 실행하는 사용자
+- WORKDIR: 작업 디렉토리 설정
+- ARGS: 빌드타임 환경변수 설정
+- LABEL: key - value 데이터
+- ONBUILD: 다른 빌드의 베이스로 사용될 떄 사용하는 명령어
+
+### 이미지 빌드하기
+```
+docker build -t {이미지명:이미지태그} {빌드 컨텍스트}
+$ docker build -t sample:1 .
+```
+- 현재 디렉토리의 Dockerfile로 빌드
+  - -f <Dockerfile 위치> 옵션을 사용해 다른 위치의 Dockerfile 파일 사용 가능
+  - -t 명령어로 도커 이미지 이름을 지정
+  - {네임스페이스}/{이미지이름}:{태그} 형식
+- 마지막에는 빌드 컨텍스트 위치를 지정
+  - 현재 디렉터리를 의미하는 점(.)을 주로 사용
+  - 필요한 경우 다른 디렉터리를 지정할 수도 있음
+  
+
+### .dockerignore
+- .gitignore와 비슷한 역할
+- 도커 빌드 컨텍스트에서 지정된 패턴의 파일을 무시
+- .git이나 민감한 정보를 제외하는 용도로 주로 사용
+- .git이나 에셋 디렉터리만 제외시켜도 빌드 속도 개선
+- 이미지 빌드 시에 사용하는 파일은 제외시키면 안 됨
+
+### Git을 설치한 ubuntu 이미지
+```
+FROM ubuntu:latest
+RUN apt-get update
+RUN apt-get install -y git
+```
+- Dockerfile을 만들고 빌드 한다.
+```
+$ docker build -t ubuntu:git-dockerfile .
+$ docker images | grep ubuntu
+```
+- [Dockerfile](4.git/Dockerfile)
+
 </details>
 
 
