@@ -1008,7 +1008,7 @@ CMD command param1 param2
   1. 62000 포트로 서버를 오픈
   2. docker-compose.yml 파일로 작성
 
-
+- [정답](9.guestbook)
 
 </details>
 
