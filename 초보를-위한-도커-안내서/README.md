@@ -880,6 +880,38 @@ CMD command param1 param2
 <details> <summary> 6. [실습] Hellonode 실습 </summary>
 
 ## 6. [실습] Hellonode 실습
+- node.js 기반의 웹서비스를 빌드한다.
+- 빌드한 이미지를 실행한다.
+- 설명
+  - Hello, World! Hostname: 0340bdc376e5
+  - 포트 - 8080
+  - 소스파일
+    - server.js
+    - ```
+      const http = require('http');
+      const os = require('os');
+      
+      const port = process.env.PORT || 8080;
+      
+      process.on('SIGINT', function() {
+      console.log('shutting down...');
+      process.exit(1);
+      });
+      
+      var handleRequest = function(request, response) {
+      console.log(`Received request for URL: ${request.url}`);
+      response.writeHead(200);
+      response.end(`Hello, World!\nHostname: ${os.hostname()}\n`);
+      };
+      
+      var www = http.createServer(handleRequest);
+      www.listen(port, () => {
+      console.log(`server listening on port ${port}`);
+      });
+      ```
+- 문제) 다음 조건을 만족하는 이미지를 만들고 컨테이너를 실행해라
+  1. hellonode:latest 이미지를 만든다.
+  2. 호트스의 60000 포트로 오픈한다.
 
 </details>
 
