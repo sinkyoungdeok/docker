@@ -999,11 +999,24 @@ CMD command param1 param2
 
 
 
+<details> <summary> 5. [실습] 실시간 채팅 앱 생성 </summary>
+
+## 5. [실습] 실시간 채팅 앱 생성
 
 
-<details> <summary> 5. 도커쿡북 </summary>
 
-## 5. 도커쿡북
+</details>
+
+
+
+
+
+
+
+
+<details> <summary> 6. 도커쿡북 </summary>
+
+## 6. 도커쿡북
 
 
 
