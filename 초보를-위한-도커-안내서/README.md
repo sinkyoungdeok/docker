@@ -815,6 +815,16 @@ CMD command param1 param2
 
 ## 3. 도커 허브 (docker hub) 이미지 관리
 
+### 이미지 저장 명령어 
+- docker login
+- docker push {ID}/example
+- docker pull {ID}/example
+
+### 이미지 저장 & 불러오기
+![image](https://user-images.githubusercontent.com/28394879/131339003-19f27126-bdaf-42b7-8ee6-ca82759156f0.png)
+
+
+
 </details>
 
 
