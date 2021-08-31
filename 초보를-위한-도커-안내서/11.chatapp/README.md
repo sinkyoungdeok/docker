@@ -1,0 +1,39 @@
+```
+
+# $ vi src/index.js # (HASURA_GRAPHQL_ENGINE_HOSTNAME 수정 ex-localhost:60004)
+# $ docker build -t chatapp .
+
+version: '3.6'
+
+services:
+  chatapp:
+    image: chatapp
+    ports:
+    - "60003:8080"
+  postgres:
+    image: postgres
+    restart: always
+    volumes:
+    - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+  graphql-engine:
+    image: hasura/graphql-engine:latest.cli-migrations
+    ports:
+    - "60004:8080"
+    depends_on:
+    - "postgres"
+    volumes:
+    - ./hasura/migrations:/hasura-migrations
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      ## uncomment next line to set an admin secret
+      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+volumes:
+  db_data:
+
+
+```
