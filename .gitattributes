@@ -1,9 +1,2 @@
-*.js linguist-detectable=false 
-*.cs linguist-detectable=false
-*.css linguist-detectable=false 
-*.html linguist-detectable=false
-*.java linguist-detectable=false
-*.py linguist-detectable=false
-*.j linguist-detectable=false
-*.sh linguist-detectable=false
-*.php linguist-detectable=false
+* linguist-vendored
+Dockerfile linguist-vendored=false
